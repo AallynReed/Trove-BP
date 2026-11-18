@@ -1,0 +1,933 @@
+{
+  "tiny-v3": {
+    "pack": {
+      "spec": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        3,
+        2,
+        3,
+        4,
+        3,
+        4,
+        5,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "count": 18,
+      "size": [
+        4,
+        4,
+        3
+      ],
+      "x": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        1,
+        2,
+        1,
+        2,
+        0,
+        3
+      ],
+      "y": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ],
+      "z": [
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        2
+      ],
+      "rgb": [
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        65280,
+        13219583,
+        16757575,
+        16773544,
+        7895160,
+        7237230
+      ],
+      "kind": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        0,
+        0
+      ],
+      "level": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        240,
+        255,
+        176,
+        255,
+        255
+      ]
+    },
+    "inspect_materials": [
+      {
+        "type": 21,
+        "w": 1,
+        "count": 3,
+        "label": "Solid - Metal",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 2,
+        "count": 3,
+        "label": "Solid - Water",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 3,
+        "count": 3,
+        "label": "Solid - Iridescent",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 4,
+        "count": 2,
+        "label": "Solid - Waxy",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 0,
+        "count": 1,
+        "label": "Solid - Rough",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 5,
+        "count": 1,
+        "label": "Solid - Wave",
+        "editable": true
+      },
+      {
+        "type": 18,
+        "w": 3,
+        "count": 1,
+        "label": "Glass - 44% opacity",
+        "editable": true
+      },
+      {
+        "type": 54,
+        "w": 7,
+        "count": 1,
+        "label": "Tiled Glass - 94% opacity",
+        "editable": true
+      },
+      {
+        "type": 55,
+        "w": 0,
+        "count": 1,
+        "label": "Glowing Solid",
+        "editable": true
+      },
+      {
+        "type": 56,
+        "w": 5,
+        "count": 1,
+        "label": "Glowing Glass - 69% opacity",
+        "editable": true
+      },
+      {
+        "type": 3,
+        "w": 0,
+        "count": 1,
+        "label": "Terrain (stone) (type 3)",
+        "editable": false
+      },
+      {
+        "type": 39,
+        "w": 0,
+        "count": 1,
+        "label": "Deco placeholder (type 39)",
+        "editable": false
+      }
+    ],
+    "inspect_stats": {
+      "voxels": 19,
+      "locked": 2,
+      "procedural": 2,
+      "placeholders": 1,
+      "entities": 0
+    },
+    "apply_summary": {
+      "voxels": 19,
+      "recoloured": 1,
+      "rematerialised": 1,
+      "added": 1,
+      "erased": 1,
+      "size": [
+        5,
+        4,
+        3
+      ],
+      "ignored": 0,
+      "version": 3,
+      "bytes": 181
+    },
+    "apply_hex": "b3e158109cc62ba7bcfbfb55e98692544881973e99a1c5168e04d7f523881237",
+    "transform_hex": "ee344bfbbbcb0a55e960b105a99f83bbff3aec8e8e73eecb1c8f4438507ccce9",
+    "qb": [
+      [
+        "m.qb",
+        "411f10242ac0be2f2dc548c0de4023ec03d14d22ba24402b691b6c511301bffa"
+      ],
+      [
+        "m_a.qb",
+        "558199adbd501edb4b9e5972ff3791b50912beec94dfd4bfd7947f69e130c61a"
+      ],
+      [
+        "m_s.qb",
+        "4e1641e4ab34f6e31acd80a605055b8e76dd65c47157b04eb5647bd0fe74ba5c"
+      ],
+      [
+        "m_t.qb",
+        "a4870b172b2fbb33cc4823e67bc3f50ec90ddc3d7ae8f9a27288be7a7f9ce080"
+      ]
+    ],
+    "check_melee": {
+      "kind": "melee",
+      "attachment": null,
+      "findings": [
+        {
+          "level": "warning",
+          "title": "2 voxels are not connected to the model",
+          "body": "These only touch the rest of the model at a corner, or not at all. Trove renders them, but the style guide asks for face-connected geometry.",
+          "voxels": [
+            16,
+            17
+          ]
+        },
+        {
+          "level": "warning",
+          "title": "This model stores no attachment point",
+          "body": "Older blueprints (format v3/v4) don't record an origin, so there's nothing to check and nothing to show. The game positions these by other means.",
+          "voxels": []
+        }
+      ],
+      "satisfied": [
+        "A blueprint stores one material per voxel, so alpha-on-solid and specular-on-glass - two of the classic .qb mistakes - can't happen here.",
+        "No near-black voxels."
+      ],
+      "counts": {
+        "error": 0,
+        "warning": 2,
+        "info": 0
+      }
+    }
+  },
+  "tiny-v4": {
+    "pack": {
+      "spec": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        3,
+        2,
+        3,
+        4,
+        3,
+        4,
+        5,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "count": 18,
+      "size": [
+        4,
+        4,
+        3
+      ],
+      "x": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        1,
+        2,
+        1,
+        2,
+        0,
+        3
+      ],
+      "y": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ],
+      "z": [
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        2
+      ],
+      "rgb": [
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        65280,
+        13219583,
+        16757575,
+        16773544,
+        7895160,
+        7237230
+      ],
+      "kind": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        0,
+        0
+      ],
+      "level": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        240,
+        255,
+        176,
+        255,
+        255
+      ]
+    },
+    "inspect_materials": [
+      {
+        "type": 21,
+        "w": 1,
+        "count": 3,
+        "label": "Solid - Metal",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 2,
+        "count": 3,
+        "label": "Solid - Water",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 3,
+        "count": 3,
+        "label": "Solid - Iridescent",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 4,
+        "count": 2,
+        "label": "Solid - Waxy",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 0,
+        "count": 1,
+        "label": "Solid - Rough",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 5,
+        "count": 1,
+        "label": "Solid - Wave",
+        "editable": true
+      },
+      {
+        "type": 18,
+        "w": 3,
+        "count": 1,
+        "label": "Glass - 44% opacity",
+        "editable": true
+      },
+      {
+        "type": 54,
+        "w": 7,
+        "count": 1,
+        "label": "Tiled Glass - 94% opacity",
+        "editable": true
+      },
+      {
+        "type": 55,
+        "w": 0,
+        "count": 1,
+        "label": "Glowing Solid",
+        "editable": true
+      },
+      {
+        "type": 56,
+        "w": 5,
+        "count": 1,
+        "label": "Glowing Glass - 69% opacity",
+        "editable": true
+      },
+      {
+        "type": 3,
+        "w": 0,
+        "count": 1,
+        "label": "Terrain (stone) (type 3)",
+        "editable": false
+      },
+      {
+        "type": 39,
+        "w": 0,
+        "count": 1,
+        "label": "Deco placeholder (type 39)",
+        "editable": false
+      }
+    ],
+    "inspect_stats": {
+      "voxels": 19,
+      "locked": 2,
+      "procedural": 2,
+      "placeholders": 1,
+      "entities": 1
+    },
+    "apply_summary": {
+      "voxels": 19,
+      "recoloured": 1,
+      "rematerialised": 1,
+      "added": 1,
+      "erased": 1,
+      "size": [
+        5,
+        4,
+        3
+      ],
+      "ignored": 0,
+      "version": 4,
+      "bytes": 193
+    },
+    "apply_hex": "b83bf902e5cfd8acd347879c6506d74e86f1d73406f8e5bbbbce7856684c6f7d",
+    "transform_hex": "83c0b5f420f36a0d12abea817dc8d50fbc54846c9bd68623546699cd3c1f33a2",
+    "qb": [
+      [
+        "m.qb",
+        "411f10242ac0be2f2dc548c0de4023ec03d14d22ba24402b691b6c511301bffa"
+      ],
+      [
+        "m_a.qb",
+        "558199adbd501edb4b9e5972ff3791b50912beec94dfd4bfd7947f69e130c61a"
+      ],
+      [
+        "m_s.qb",
+        "4e1641e4ab34f6e31acd80a605055b8e76dd65c47157b04eb5647bd0fe74ba5c"
+      ],
+      [
+        "m_t.qb",
+        "a4870b172b2fbb33cc4823e67bc3f50ec90ddc3d7ae8f9a27288be7a7f9ce080"
+      ]
+    ],
+    "check_melee": {
+      "kind": "melee",
+      "attachment": null,
+      "findings": [
+        {
+          "level": "warning",
+          "title": "2 voxels are not connected to the model",
+          "body": "These only touch the rest of the model at a corner, or not at all. Trove renders them, but the style guide asks for face-connected geometry.",
+          "voxels": [
+            16,
+            17
+          ]
+        },
+        {
+          "level": "warning",
+          "title": "This model stores no attachment point",
+          "body": "Older blueprints (format v3/v4) don't record an origin, so there's nothing to check and nothing to show. The game positions these by other means.",
+          "voxels": []
+        }
+      ],
+      "satisfied": [
+        "A blueprint stores one material per voxel, so alpha-on-solid and specular-on-glass - two of the classic .qb mistakes - can't happen here.",
+        "No near-black voxels."
+      ],
+      "counts": {
+        "error": 0,
+        "warning": 2,
+        "info": 0
+      }
+    }
+  },
+  "tiny-v5": {
+    "pack": {
+      "spec": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        2,
+        3,
+        4,
+        2,
+        3,
+        4,
+        5,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "count": 18,
+      "size": [
+        4,
+        4,
+        3
+      ],
+      "x": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        1,
+        2,
+        1,
+        2,
+        0,
+        3
+      ],
+      "y": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ],
+      "z": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        2
+      ],
+      "rgb": [
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        4212816,
+        65280,
+        13219583,
+        16757575,
+        16773544,
+        7895160,
+        7237230
+      ],
+      "kind": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        0,
+        0
+      ],
+      "level": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        240,
+        255,
+        176,
+        255,
+        255
+      ]
+    },
+    "inspect_materials": [
+      {
+        "type": 21,
+        "w": 1,
+        "count": 3,
+        "label": "Solid - Metal",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 2,
+        "count": 3,
+        "label": "Solid - Water",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 3,
+        "count": 3,
+        "label": "Solid - Iridescent",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 4,
+        "count": 2,
+        "label": "Solid - Waxy",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 0,
+        "count": 1,
+        "label": "Solid - Rough",
+        "editable": true
+      },
+      {
+        "type": 21,
+        "w": 5,
+        "count": 1,
+        "label": "Solid - Wave",
+        "editable": true
+      },
+      {
+        "type": 54,
+        "w": 7,
+        "count": 1,
+        "label": "Tiled Glass - 94% opacity",
+        "editable": true
+      },
+      {
+        "type": 55,
+        "w": 0,
+        "count": 1,
+        "label": "Glowing Solid",
+        "editable": true
+      },
+      {
+        "type": 56,
+        "w": 5,
+        "count": 1,
+        "label": "Glowing Glass - 69% opacity",
+        "editable": true
+      },
+      {
+        "type": 3,
+        "w": 0,
+        "count": 1,
+        "label": "Terrain (stone) (type 3)",
+        "editable": false
+      },
+      {
+        "type": 39,
+        "w": 0,
+        "count": 1,
+        "label": "Deco placeholder (type 39)",
+        "editable": false
+      }
+    ],
+    "inspect_stats": {
+      "voxels": 18,
+      "locked": 2,
+      "procedural": 2,
+      "placeholders": 1,
+      "entities": 1
+    },
+    "apply_summary": {
+      "voxels": 18,
+      "recoloured": 1,
+      "rematerialised": 1,
+      "added": 1,
+      "erased": 1,
+      "size": [
+        5,
+        4,
+        3
+      ],
+      "ignored": 0,
+      "version": 5,
+      "bytes": 127
+    },
+    "apply_hex": "31ed789db71aebcc8fa9cc80d4c36b3914f2343272a7862fa8f246b2bb5ee9b8",
+    "transform_hex": "552e2c802fb37981c2329b7986cbdf4a4fea27b51119cf205f394424626576ce",
+    "qb": [
+      [
+        "m.qb",
+        "d26464bc664f32165bc51a24911fc522e3460e1c8522c3dc328919f8515de537"
+      ],
+      [
+        "m_a.qb",
+        "35b2cf1acc885906843c6695cc0c361df60d3423a34eab890e92c5329d6ab079"
+      ],
+      [
+        "m_s.qb",
+        "55cfab35d75902174da445d90054111d6caf29f7cd6de659d32fb9ff978960c9"
+      ],
+      [
+        "m_t.qb",
+        "8600c926019e3655a54488717d5bbee9b518da3bf3a10a58c205a6afcd3246c0"
+      ]
+    ],
+    "check_melee": {
+      "kind": "melee",
+      "attachment": [
+        1,
+        0,
+        1
+      ],
+      "findings": [
+        {
+          "level": "warning",
+          "title": "2 voxels are not connected to the model",
+          "body": "These only touch the rest of the model at a corner, or not at all. Trove renders them, but the style guide asks for face-connected geometry.",
+          "voxels": [
+            16,
+            17
+          ]
+        },
+        {
+          "level": "warning",
+          "title": "The grip is crowded",
+          "body": "Around the attachment point there should be nothing in a 3x3x3 cube except the handle running lengthwise - that space is the hand.",
+          "voxels": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            13
+          ]
+        }
+      ],
+      "satisfied": [
+        "A blueprint stores one material per voxel, so alpha-on-solid and specular-on-glass - two of the classic .qb mistakes - can't happen here.",
+        "No near-black voxels.",
+        "Attachment point recorded at (1, 0, 1)."
+      ],
+      "counts": {
+        "error": 0,
+        "warning": 2,
+        "info": 0
+      }
+    }
+  }
+}

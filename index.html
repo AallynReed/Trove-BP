@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0e14" />
+    <meta name="description" content="View and edit Trove voxel models (.blueprint) in the browser. Your files stay on your machine." />
+    <title>Trove-BP</title>
+    <link rel="icon" href="./icon.png" type="image/png" />
+  </head>
+  <body data-mode="view">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-mark" src="./icon.png" width="28" height="28" alt="" />
+        <span class="brand-name">Trove-BP</span>
+      </div>
+      <div class="modes" role="tablist" aria-label="Mode">
+        <button class="mode" id="tab-view" type="button" role="tab" aria-selected="true" aria-controls="view-page">View</button>
+        <button class="mode" id="tab-edit" type="button" role="tab" aria-selected="false" aria-controls="bpe-page">Edit</button>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn" id="open-folder" type="button">Open folder</button>
+        <button class="btn btn-primary" id="open-files" type="button">Open files</button>
+        <button class="btn btn-ghost" id="open-brdf" type="button" title="Load textures/brdfmap.dds from your Trove install to show metal, water and other finishes">Specular map</button>
+      </div>
+      <input type="file" id="folder-input" webkitdirectory multiple hidden />
+      <input type="file" id="files-input" accept=".blueprint" multiple hidden />
+      <input type="file" id="brdf-input" accept=".dds" hidden />
+    </header>
+
+    <div class="view-page" id="view-page" role="tabpanel" aria-labelledby="tab-view">
+      <aside class="sidebar" aria-label="Models">
+        <div class="sidebar-head">
+          <div class="pack-name" id="pack-name">No models open</div>
+          <input class="search" id="search" type="search" placeholder="Filter models" aria-label="Filter models" autocomplete="off" spellcheck="false" disabled />
+          <div class="list-count" id="list-count" aria-live="polite"></div>
+        </div>
+        <ul class="file-list" id="file-list" aria-label="Models"></ul>
+      </aside>
+
+      <main class="stage-wrap">
+        <div class="stage-bar">
+          <strong class="model-title" id="model-title"></strong>
+          <span class="model-meta" id="model-meta"></span>
+          <button class="btn" id="edit-this" type="button" hidden>Edit this model</button>
+        </div>
+        <div class="viewer-stage bpv-stage" id="viewer-stage">
+          <section class="empty" id="empty" aria-labelledby="empty-title">
+            <div class="empty-card">
+              <h1 id="empty-title">Look inside Trove's voxel models</h1>
+              <p>Open a folder of <code>.blueprint</code> files, or drop some here, and turn them around in 3D. Switch to Edit to recolour a model, change its materials or build onto it, then download it again. Files are read in your browser and never uploaded.</p>
+              <div class="empty-actions">
+                <button class="btn btn-primary" id="empty-folder" type="button">Open folder</button>
+                <button class="btn" id="empty-files" type="button">Open files</button>
+                <button class="btn btn-ghost" id="empty-demo" type="button">Try the demo</button>
+              </div>
+              <details class="empty-more">
+                <summary>Where are Trove's blueprints?</summary>
+                <p>Extract Trove's game archives with a modding tool and open the <code>blueprints</code> folder. Your browser may ask whether to "upload" the folder. That is its standard wording for letting a page read files; nothing leaves your computer.</p>
+              </details>
+            </div>
+          </section>
+          <div class="msg" id="viewer-msg" hidden></div>
+        </div>
+        <p class="hint" aria-hidden="true">Drag to rotate · right-drag or shift-drag to pan · scroll to zoom</p>
+      </main>
+      <div class="drop-overlay" id="drop-overlay" hidden><div class="drop-card">Drop .blueprint files or a folder</div></div>
+    </div>
+
+  <div id="bpe-page" class="blueprint-editor-page edit-page" hidden>
+    <main class="bpe-main" aria-label="Blueprint editor">
+      <div id="bpe-empty" class="bpe-empty">
+          <i class="fa-solid fa-cube" aria-hidden="true"></i>
+          <h2>Open a blueprint to edit</h2>
+          <p>Drop a <code>.blueprint</code> file here, or pick one below. It is read in your browser and never uploaded.</p>
+          <div class="bpe-openrow">
+              <button type="button" class="bpe-btn bpe-primary" id="bpe-open">
+                  <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                  <span>Choose a file</span>
+              </button>
+              <button type="button" class="bpe-btn" id="bpe-import-qb">
+                  <i class="fa-solid fa-file-import" aria-hidden="true"></i>
+                  <span>Open .qb files</span>
+              </button>
+          </div>
+          <div class="bpe-resume" id="bpe-resume" hidden>
+              <h3>Pick up where you left off</h3>
+              <p class="bpe-hint">Saved in this browser as you work, never uploaded. Clearing your browser data clears these too.</p>
+              <ul class="bpe-resumelist" id="bpe-resumelist"></ul>
+          </div>
+          <p class="bpe-hint bpe-openhint">Working in Qubicle or MagicaVoxel? Save as <code>.qb</code>, then pick it along with its <code>_a</code>, <code>_s</code> and <code>_t</code> material maps and they are compiled into a blueprint. Qubicle's own <code>.qbcl</code> holds several models at once and can't be read.</p>
+      </div>
+      <div id="bpe-workspace" class="bpe-workspace" hidden>
+          <aside class="bpe-panel">
+              <h2>Tools</h2>
+
+              <div class="bpe-chips bpe-tools">
+                  <button type="button" data-tool="paint" aria-pressed="true" title="Paint" aria-label="Paint">
+                      <i class="fa-solid fa-brush" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" data-tool="pick" aria-pressed="false" title="Pick up a colour" aria-label="Pick up a colour">
+                      <i class="fa-solid fa-eye-dropper" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" data-tool="add" aria-pressed="false" title="Add voxels" aria-label="Add voxels">
+                      <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" data-tool="erase" aria-pressed="false" title="Erase" aria-label="Erase">
+                      <i class="fa-solid fa-eraser" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" data-tool="move" aria-pressed="false" title="Move" aria-label="Move">
+                      <i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" data-tool="select" aria-pressed="false" title="Select" aria-label="Select">
+                      <i class="fa-solid fa-object-ungroup" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" data-tool="box" aria-pressed="false" title="Box fill" aria-label="Box fill">
+                      <i class="fa-solid fa-vector-square" aria-hidden="true"></i>
+                  </button>
+              </div>
+              <p class="bpe-hint bpe-toolhint" id="bpe-toolhint">Click a voxel to paint it.</p>
+
+              <h3 id="bpe-xform-label">Turn it</h3>
+              <div class="bpe-xforms" id="bpe-transforms"></div>
+              <p class="bpe-hint">The attachment point and any placed objects come with it.</p>
+
+              <div id="bpe-grabblock" hidden>
+                  <h3>Select</h3>
+                  <div class="bpe-chips" id="bpe-grabs"></div>
+              </div>
+
+              <div id="bpe-boxblock" hidden>
+                  <h3>The box</h3>
+                  <div class="bpe-chips" id="bpe-boxmodes">
+                      <button type="button" data-boxmode="fill" aria-pressed="true">Fills it</button>
+                      <button type="button" data-boxmode="clear" aria-pressed="false">Clears it</button>
+                  </div>
+              </div>
+
+              <h3 id="bpe-slice-label">Slice</h3>
+              <div class="bpe-chips" id="bpe-slice-axes">
+                  <button type="button" data-slice="off" aria-pressed="true">Off</button>
+                  <button type="button" data-slice="x" aria-pressed="false" title="Slice across X">X</button>
+                  <button type="button" data-slice="y" aria-pressed="false" title="Slice across Y">Y</button>
+                  <button type="button" data-slice="z" aria-pressed="false" title="Slice across Z">Z</button>
+              </div>
+              <div class="bpe-slicebar" id="bpe-slicebar" hidden>
+                  <button type="button" class="bpe-xform" data-slicestep="-1" aria-label="Previous layer">&minus;</button>
+                  <input type="range" id="bpe-slice-at" min="0" max="0" value="0" aria-label="Which layer">
+                  <button type="button" class="bpe-xform" data-slicestep="1" aria-label="Next layer">+</button>
+                  <span class="bpe-nudge-val" id="bpe-slice-read">0</span>
+              </div>
+              <p class="bpe-hint" id="bpe-slicehint" hidden>Only this layer is drawn, so clicks reach the voxels inside. Use the bracket keys to step through it.</p>
+
+              <div id="bpe-unionblock">
+                  <h3 id="bpe-union-label">Union</h3>
+                  <div class="bpe-actions">
+                      <button type="button" class="bpe-btn" id="bpe-flatten" disabled>
+                          <i class="fa-solid fa-object-group" aria-hidden="true"></i>
+                          <span>Union the layers</span>
+                      </button>
+                  </div>
+                  <p class="bpe-hint" id="bpe-unionhint">Merges every layer into a single blueprint. Where two overlap, the top one wins.</p>
+              </div>
+
+              <div class="bpe-selbar" id="bpe-selbar" hidden>
+                  <p class="bpe-selcount" id="bpe-selcount"></p>
+                  <div class="bpe-actions">
+                      <button type="button" class="bpe-btn" id="bpe-selout" aria-pressed="false">Working inside it</button>
+                      <button type="button" class="bpe-btn" id="bpe-selclear">Clear</button>
+                  </div>
+                  <div class="bpe-nudge" id="bpe-selnudge">
+                      <span class="bpe-nudge-axis">X</span>
+                      <button type="button" class="bpe-xform" data-selnudge="-1,0,0">&minus;</button>
+                      <button type="button" class="bpe-xform" data-selnudge="1,0,0">+</button>
+                      <span class="bpe-nudge-axis">Y</span>
+                      <button type="button" class="bpe-xform" data-selnudge="0,-1,0">&minus;</button>
+                      <button type="button" class="bpe-xform" data-selnudge="0,1,0">+</button>
+                      <span class="bpe-nudge-axis">Z</span>
+                      <button type="button" class="bpe-xform" data-selnudge="0,0,-1">&minus;</button>
+                      <button type="button" class="bpe-xform" data-selnudge="0,0,1">+</button>
+                  </div>
+                  <label class="bpe-toggle">
+                      <input type="checkbox" id="bpe-selcopy">
+                      <span>Leave a copy behind</span>
+                  </label>
+              </div>
+
+              <h3 id="bpe-paint-colour">Colour</h3>
+              <div class="bpe-colourrow">
+                  <input type="color" id="bpe-colour" value="#ff6b6b" aria-label="Paint colour">
+                  <span class="bpe-colourhex" id="bpe-colour-hex">#FF6B6B</span>
+
+                  <button type="button" class="bpe-swatchadd" id="bpe-swatch-add"
+                          title="Save this colour to the palette">
+                      <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                      <span class="sr-only">Save this colour</span>
+                  </button>
+              </div>
+              <ul class="bpe-swatches" id="bpe-swatches"></ul>
+
+              <h3 id="bpe-paint-material">Material</h3>
+              <div class="bpe-chips" id="bpe-types"></div>
+
+              <h3 id="bpe-finish-label">Finish</h3>
+              <div class="bpe-chips" id="bpe-finish"></div>
+
+              <h3 id="bpe-modes-label">A click changes</h3>
+              <div class="bpe-chips" id="bpe-modes">
+                  <button type="button" data-mode="both" aria-pressed="true">Both</button>
+                  <button type="button" data-mode="colour" aria-pressed="false">Colour only</button>
+                  <button type="button" data-mode="material" aria-pressed="false">Material only</button>
+              </div>
+
+              <h3 id="bpe-scope-label">And affects</h3>
+              <div class="bpe-chips" id="bpe-scopes">
+                  <button type="button" data-scope="voxel" aria-pressed="true">Just that voxel</button>
+                  <button type="button" data-scope="colour" aria-pressed="false">Every voxel of that colour</button>
+                  <button type="button" data-scope="material" aria-pressed="false">Every voxel of that material</button>
+              </div>
+              <p class="bpe-hint bpe-scopehint" id="bpe-scopehint"></p>
+
+              <h3>Show</h3>
+              <label class="bpe-toggle">
+                  <input type="checkbox" id="bpe-show-attach" checked>
+                  <span>Attachment point</span>
+              </label>
+
+              <details class="bpe-fold" id="bpe-movefold" hidden>
+                  <summary><span id="bpe-movefold-label">Move on the rig</span></summary>
+                  <div id="bpe-layerctl">
+                      <label class="sr-only" for="bpe-align">How should this layer line up?</label>
+                      <select id="bpe-align"></select>
+                      <div class="bpe-nudge" id="bpe-nudge">
+                          <span class="bpe-nudge-axis">X</span>
+                          <button type="button" class="bpe-xform" data-nudge="-1,0,0">&minus;</button>
+                          <span class="bpe-nudge-val" id="bpe-nudge-x">0</span>
+                          <button type="button" class="bpe-xform" data-nudge="1,0,0">+</button>
+                          <span class="bpe-nudge-axis">Y</span>
+                          <button type="button" class="bpe-xform" data-nudge="0,-1,0">&minus;</button>
+                          <span class="bpe-nudge-val" id="bpe-nudge-y">0</span>
+                          <button type="button" class="bpe-xform" data-nudge="0,1,0">+</button>
+                          <span class="bpe-nudge-axis">Z</span>
+                          <button type="button" class="bpe-xform" data-nudge="0,0,-1">&minus;</button>
+                          <span class="bpe-nudge-val" id="bpe-nudge-z">0</span>
+                          <button type="button" class="bpe-xform" data-nudge="0,0,1">+</button>
+                      </div>
+                  </div>
+              </details>
+          </aside>
+
+          <div class="bpe-centre">
+          <section class="bpe-panel bpe-stagecard">
+              <div class="bpe-stagebar">
+                  <strong id="bpe-filename">blueprint</strong>
+                  <span class="bpe-metaline" id="bpe-meta"></span>
+              </div>
+              <div class="bpe-stage" id="bpe-stage">
+                  <span class="bpe-hoverline" id="bpe-hover" aria-live="off" hidden></span>
+              </div>
+
+              <div class="bpe-stagefoot">
+                  <div class="bpe-footacts">
+                      <button type="button" class="bpe-btn" id="bpe-open2"
+                              title="Open a single .blueprint">
+                          <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                          <span>Open a blueprint</span>
+                      </button>
+                      <button type="button" class="bpe-btn" id="bpe-import-qb2"
+                              title="Compile Qubicle .qb files — the model plus its _a, _s and _t material maps — into a blueprint">
+                          <i class="fa-solid fa-file-import" aria-hidden="true"></i>
+                          <span>Import .qb</span>
+                      </button>
+                      <button type="button" class="bpe-btn" id="bpe-export-qb"
+                              title="Export this model as the four .qb files Qubicle and MagicaVoxel author in">
+                          <i class="fa-solid fa-file-export" aria-hidden="true"></i>
+                          <span>Export .qb</span>
+                      </button>
+                  </div>
+                  <button type="button" class="bpe-btn bpe-keysbtn" id="bpe-keys">
+                      <i class="fa-solid fa-keyboard" aria-hidden="true"></i>
+                      <span>Controls</span>
+                  </button>
+              </div>
+          </section>
+
+          <section class="bpe-panel bpe-underbar">
+              <div class="bpe-under-sel">
+                  <h3>Selected</h3>
+                  <div id="bpe-selection">
+                      <p class="bpe-hint">Click a voxel to select it.</p>
+                  </div>
+              </div>
+              <div class="bpe-under-mats">
+                  <h3>Materials used</h3>
+                  <ul class="bpe-materials" id="bpe-materials"></ul>
+                  <ul class="bpe-notes" id="bpe-notes" hidden></ul>
+              </div>
+          </section>
+          </div>
+
+          <aside class="bpe-panel">
+              <h2>Save</h2>
+              <div class="bpe-saveblock">
+                  <p class="bpe-dirty" id="bpe-dirty" aria-live="polite">No changes yet</p>
+                  <p class="bpe-saved" id="bpe-saved" hidden></p>
+                  <div class="bpe-actions">
+                      <button type="button" class="bpe-btn bpe-primary" id="bpe-save">
+                          <i class="fa-solid fa-download" aria-hidden="true"></i>
+                          <span id="bpe-save-label">Download</span>
+                      </button>
+
+                      <span class="bpe-btnpair">
+                          <button type="button" class="bpe-btn" id="bpe-undo" disabled>
+                              <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                              <span>Undo</span>
+                          </button>
+                          <button type="button" class="bpe-btn" id="bpe-redo" disabled>
+                              <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                              <span>Redo</span>
+                          </button>
+                      </span>
+                      <button type="button" class="bpe-btn" id="bpe-revert" disabled>Revert all</button>
+                  </div>
+              </div>
+
+              <h3 id="bpe-layers-title">Layers</h3>
+              <p class="bpe-hint" id="bpe-layers-hint">Each layer is its own blueprint. Pick one to edit it, drag it about with the Move tool, and reorder them — on download the top layer wins wherever two overlap.</p>
+              <ul class="bpe-layers" id="bpe-layerlist"></ul>
+              <div class="bpe-actions">
+                  <button type="button" class="bpe-btn" id="bpe-layer-open">
+                      <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                      <span id="bpe-layer-open-label">Add a layer</span>
+                  </button>
+              </div>
+              <p class="bpe-hint" id="bpe-layerinfo"></p>
+
+              <div id="bpe-checkblock">
+                  <h3>Check it over</h3>
+                  <p class="bpe-hint">Trove has size, orientation and attachment rules per item type. Tell it what you're making and it'll check.</p>
+                  <div class="bpe-checkrow">
+                      <label class="sr-only" for="bpe-kind">What are you making?</label>
+                      <select id="bpe-kind"></select>
+                      <button type="button" class="bpe-btn" id="bpe-check">
+                          <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+                          <span>Check</span>
+                      </button>
+                  </div>
+                  <div id="bpe-report" class="bpe-report" aria-live="polite" hidden></div>
+              </div>
+
+          </aside>
+      </div>
+
+      <p class="bpe-status" id="bpe-status" role="status" hidden></p>
+
+  </main>
+
+  <dialog id="bpe-keysdlg" class="bpe-dlg" aria-labelledby="bpe-keys-title">
+      <div class="bpe-dlg-head">
+          <h2 id="bpe-keys-title">Controls</h2>
+          <button type="button" class="bpe-dlg-x" id="bpe-keys-close" aria-label="Close">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+      </div>
+
+      <div class="bpe-navpick">
+          <span class="bpe-navpick-label" id="bpe-navlabel">Mouse controls</span>
+          <div class="bpe-navbtns" role="radiogroup" aria-labelledby="bpe-navlabel">
+              <button type="button" class="bpe-navbtn" data-nav="magicavoxel" role="radio" aria-checked="false">MagicaVoxel</button>
+              <button type="button" class="bpe-navbtn" data-nav="blender" role="radio" aria-checked="false">Blender</button>
+              <button type="button" class="bpe-navbtn" data-nav="maya" role="radio" aria-checked="false">Maya</button>
+          </div>
+      </div>
+
+      <dl class="bpe-keys">
+          <dt>Turn the view</dt><dd id="bpe-nav-orbit"></dd>
+          <dt>Pan</dt><dd id="bpe-nav-pan"></dd>
+          <dt>Zoom</dt><dd id="bpe-nav-zoom"></dd>
+
+          <dt>Use the current tool</dt><dd><span>Click, or drag across voxels</span></dd>
+
+          <dt class="bpe-keys-wide">Pick a tool</dt>
+          <dd class="bpe-keys-wide">
+              <span class="bpe-keycombo bpe-keycombo-own-line"><kbd>1</kbd>&ndash;<kbd>7</kbd> <span>along the row, or</span></span>
+              <span class="bpe-keycombo"><kbd>B</kbd> <span>paint</span></span>
+              <span class="bpe-keycombo"><kbd>I</kbd> <span>pick up</span></span>
+              <span class="bpe-keycombo"><kbd>A</kbd> <span>add</span></span>
+              <span class="bpe-keycombo"><kbd>E</kbd> <span>erase</span></span>
+              <span class="bpe-keycombo"><kbd>V</kbd> <span>move</span></span>
+              <span class="bpe-keycombo"><kbd>S</kbd> <span>select</span></span>
+              <span class="bpe-keycombo"><kbd>R</kbd> <span>box</span></span>
+          </dd>
+          <dt>Select a region</dt>
+          <dd><span>Drag a box with the Select tool</span></dd>
+          <dt>Add to / take from a selection</dt>
+          <dd><kbd>Shift</kbd> / <kbd>Ctrl</kbd> + <span>click or drag</span></dd>
+          <dt>Pick up a colour and material</dt><dd><kbd>Alt</kbd> + click</dd>
+          <dt>Undo</dt><dd><kbd>Ctrl</kbd> + <kbd>Z</kbd></dd>
+          <dt>Redo</dt>
+          <dd><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd>, <span>or</span> <kbd>Ctrl</kbd> + <kbd>Y</kbd></dd>
+          <dt>Step through a slice</dt><dd><kbd>[</kbd> <span>and</span> <kbd>]</kbd></dd>
+      </dl>
+      <p class="bpe-hint">No middle mouse button? Ctrl + drag turns the view and Shift + drag pans it, in every preset.</p>
+  </dialog>
+
+  <input type="file" id="bpe-input" accept=".blueprint" hidden>
+  <input type="file" id="bpe-qb-input" accept=".qb" multiple hidden>
+  <input type="file" id="bpe-layer-input" accept=".blueprint" multiple hidden>
+  </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./vendor/three.min.js"></script>
+    <script type="module" src="./src/app/main.js"></script>
+  </body>
+</html>
