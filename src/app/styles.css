@@ -37,7 +37,7 @@ body {
   font: 15px/1.5 var(--font);
   -webkit-font-smoothing: antialiased;
 }
-body[data-mode='view'] { overflow: hidden; }
+body[data-app='view'] { overflow: hidden; }
 
 button, input, select { font: inherit; color: inherit; }
 code { font-family: var(--font-mono); font-size: .92em; }
@@ -260,7 +260,7 @@ kbd {
   #open-folder { display: none; }
   .view-page { grid-template-columns: 1fr; grid-template-rows: 34% minmax(0, 1fr); }
   .sidebar { border-right: 0; border-bottom: 1px solid var(--bg-line); }
-  body[data-mode='view'] .empty-card { padding: 22px; }
+  body[data-app='view'] .empty-card { padding: 22px; }
 }
 
 @media (max-width: 520px) {

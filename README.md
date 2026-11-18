@@ -27,11 +27,11 @@
 
 View and edit Trove's voxel models (`.blueprint`) in the browser. Open a folder of blueprints to turn them around in 3D, or switch to Edit to recolour a model, change its materials, build onto it and download it again. Everything runs on your machine, and nothing gets uploaded.
 
-The decoder and editor reproduce how Trove reads and writes blueprints, and were checked file by file against the reference implementation on every blueprint the game ships. They started as the blueprint viewer and Blueprint Editor in [KiwiAPI](https://github.com/AallynReed/KiwiAPI), where a server did the decoding; here it all happens in the page.
+The decoder and editor reproduce how Trove reads and writes blueprints. The decoder was checked file by file against the reference implementation on all 73,987 blueprints the game ships, and every editing operation on a sample of 924 of them. They started as the blueprint viewer and Blueprint Editor in [KiwiAPI](https://github.com/AallynReed/KiwiAPI), where a server did the decoding; here it all happens in the page.
 
 ## Features
 
-- **View.** Open a folder or drop files and every blueprint is listed and searchable. Pick one to see it the way the game shades it, with glass, glowing voxels and the attachment point. Change the backdrop or the sun, and save a PNG.
+- **View.** Open a folder or drop files and every blueprint is listed and searchable. Pick one to see it the way the game shades it, glass and glowing voxels included. Change the backdrop or the sun, and save a PNG.
 - **Edit.** Paint colours and materials voxel by voxel or for every voxel that shares a colour or material, add and erase voxels, box-fill, select and move regions, slice through a model to reach its inside, and turn or mirror it. Undo and redo throughout.
 - **Layers.** Stack several blueprints, line them up by their attachment points, centres or corners, and union them into one.
 - **Check it over.** Tells you where a hat, weapon, mask or decoration breaks Trove's Creations size, orientation and attachment rules, and shows you the voxels in question.
@@ -87,7 +87,7 @@ Current Chrome, Edge, Firefox and Safari with WebGL. **Open folder** uses the br
 
 ## License
 
-[MIT](LICENSE). three.js (r134) is bundled under its own MIT license.
+[MIT](LICENSE). three.js (r134) and fflate are bundled under their own MIT licenses.
 
 ## Trademarks
 

@@ -1,6 +1,4 @@
-// Diff the JS engine against a reference dump: node scripts/corpus-check.mjs <reference.jsonl>
-// Viewer lines: {p, n, size, spec, h} or {p, err}, h = sha256 over the packed arrays.
-// Editor lines: {p, inspect, apply, transform, check_*, export, import, flatten}, see editRecord().
+// Diff the engine against a reference dump (docs/ARCHITECTURE.md): node scripts/corpus-check.mjs <reference.jsonl>
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { pack } from '../src/engine/pack.js';

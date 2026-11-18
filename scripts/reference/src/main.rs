@@ -1,5 +1,4 @@
-//! Reference dumps for scripts/corpus-check.mjs, from the KiwiAPI decoder.
-//! reference-dump <list.txt> > pack.jsonl | reference-dump edit <list.txt> > edit.jsonl | reference-dump fixtures <dir>
+//! Reference dumps for scripts/corpus-check.mjs: `reference-dump [edit|fixtures] <list.txt|dir>`.
 mod edit;
 mod fixtures;
 use std::io::{BufRead, Write};

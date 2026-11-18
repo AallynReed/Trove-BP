@@ -1,5 +1,4 @@
-// zlib streams. Trove writes v5 bodies without a final block, so inflate keeps whatever decodes
-// (zlib's decompressobj behaviour); the browser's DecompressionStream drops output on truncation.
+// zlib via fflate: Trove's v5 streams have no final block, which DecompressionStream drops output on.
 import { Unzlib, zlibSync } from 'fflate';
 
 // Inflate a zlib stream; null when it is not valid zlib.

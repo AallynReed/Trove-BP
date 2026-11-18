@@ -154,7 +154,7 @@ async function entriesOf(items) {
 
 function setMode(mode) {
   state.mode = mode;
-  document.body.dataset.mode = mode;
+  document.body.dataset.app = mode;
   $('view-page').hidden = mode !== 'view';
   $('bpe-page').hidden = mode !== 'edit';
   $('tab-view').setAttribute('aria-selected', String(mode === 'view'));

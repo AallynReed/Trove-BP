@@ -10,6 +10,6 @@ First standalone release, split out of KiwiAPI.
 
 - View mode: open a folder or files, filter the list, and see each blueprint with the game's shading, backdrops, a sun control and PNG snapshots.
 - Edit mode: the Blueprint Editor, with painting, materials, add, erase, box fill, selection, slicing, transforms, layers and union, the Creations check, `.qb` export and import, and autosave in the browser.
-- The blueprint decoder, encoder and every editing operation run in the browser; checked against the reference implementation on Trove's full set of blueprints.
+- The blueprint decoder, encoder and every editing operation run in the browser; the decoder was checked against the reference implementation on all of Trove's blueprints, and the editor on a sample of them.
 - Optional specular map from the user's own game files.
 - A demo lantern model.
