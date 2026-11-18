@@ -44,7 +44,7 @@ Trove writes v5 streams without a final block, so inflating must keep everything
 
 ## Checking against the reference
 
-`scripts/corpus-check.mjs` compares this engine with dumps made by the KiwiAPI implementation (`scripts/reference/`, a small Rust program that links its `kiwi-core` crate):
+`scripts/corpus-check.mjs` compares this engine with dumps made by the KiwiAPI implementation (its `kiwi-core` crate), which is the reference:
 
 - **Viewer dumps** hold, per file, the voxel count, size and a SHA-256 over the packed arrays (`x y z` as `i32`, `rgb` as `u32`, `kind` `u8`, `level` `u16`, `spec` `u8`), or the error kind.
 - **Editor dumps** run a fixed script on each file: inspect, an edit list that recolours, rematerialises, erases and adds voxels, three transforms, the Creations check for three item types, `.qb` export then re-import, and a two-layer flatten. Output files are compared after inflating (the deflate streams differ; the contents don't), `.qb` files byte for byte.
